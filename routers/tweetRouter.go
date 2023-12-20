@@ -9,6 +9,6 @@ import (
 func TweetRouter(router *mux.Router) {
 	router.HandleFunc("/api/tweet/create", controller.CreateTweet).Methods("POST")
 	router.HandleFunc("/api/tweets", controller.GetTweets).Methods("GET")
-	router.HandleFunc("/api/tweet/:id", controller.EditTweet).Methods("PUT")
-	router.HandleFunc("/api/tweet/:id", controller.GetTweet).Methods("GET")
+	router.HandleFunc("/api/tweet", controller.DeleteTweet).Methods("DELETE")
+	router.HandleFunc("/api/tweet", controller.GetTweet).Methods("GET")
 }
