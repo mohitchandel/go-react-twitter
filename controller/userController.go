@@ -7,8 +7,6 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/gorilla/sessions"
-
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -63,8 +61,6 @@ func RegisterUser(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode("{user: user}")
 }
 
-var store = sessions.NewCookieStore([]byte("ss11"))
-
 func LoginUser(w http.ResponseWriter, r *http.Request) {
 	username := r.URL.Query().Get("username")
 	password := r.URL.Query().Get("password")
@@ -92,13 +88,6 @@ func LoginUser(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Invalid credentials", http.StatusUnauthorized)
 		return
 	}
-
-	// If the passwords match, create a session for the user
-	session, _ := store.Get(r, "session-name")
-	session.Values["username"] = username
-	session.Save(r, w)
-
-	fmt.Fprintf(w, "User logged in successfully")
 }
 
 func GetUser(w http.ResponseWriter, r *http.Request) {
